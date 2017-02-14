@@ -118,10 +118,12 @@ class TransferChargeFee(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
 
+from django.contrib.auth.models import User
+
 @python_2_unicode_compatible
 class Customer(StripeObject):
 
-    user = models.OneToOneField('django.contrib.auth.models.User', null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     account_balance = models.DecimalField(decimal_places=2, max_digits=9, null=True)
     currency = models.CharField(max_length=10, default="usd", blank=True)
     delinquent = models.BooleanField(default=False)

@@ -32,6 +32,7 @@ DEFAULT_SETTINGS = dict(
         "django_forms_bootstrap",
         "jsonfield",
         "pinax.stripe",
+        "pinax.stripe.tests",
     ],
     SITE_ID=1,
     PINAX_STRIPE_PUBLIC_KEY="",
