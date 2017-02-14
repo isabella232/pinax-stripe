@@ -1,3 +1,6 @@
+"""
+Backport of django.setup() from django 1.7
+"""
 import importlib
 import warnings
 

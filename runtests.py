@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-from pinax import django14
+from pinax.django14.setup import setup
 
 import django
 from django.conf import settings
@@ -69,7 +69,7 @@ def runtests(*test_args):
     if not settings.configured:
         settings.configure(**DEFAULT_SETTINGS)
 
-    django14.setup(settings)
+    setup(settings)
 
     parent = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, parent)

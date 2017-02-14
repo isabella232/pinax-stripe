@@ -4,11 +4,13 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import smart_str
-from django.views.generic import TemplateView, DetailView, View, FormView, ListView
+from django.views.generic import DetailView, View, FormView, ListView
 from django.views.generic.edit import FormMixin
 from django.views.decorators.csrf import csrf_exempt
 
 import stripe
+
+from pinax.django14.views import TemplateView
 
 from .actions import events, exceptions, customers, subscriptions, sources
 from .conf import settings

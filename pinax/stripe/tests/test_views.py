@@ -6,7 +6,7 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
-from django.contrib.auth.models import User
+from pinax.django14.auth import get_user_model
 
 import stripe
 
@@ -14,10 +14,6 @@ from mock import patch
 
 from ..models import Card, Customer, Invoice, Plan, Subscription
 from ..views import PaymentMethodCreateView
-
-
-def get_user_model():
-    return User
 
 
 class PaymentsContextMixinTests(TestCase):
