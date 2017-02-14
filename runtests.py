@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
+from pinax import django14
 
 import django
-
 from django.conf import settings
 
 old = django.VERSION < (1, 8)
@@ -68,7 +68,7 @@ def runtests(*test_args):
     if not settings.configured:
         settings.configure(**DEFAULT_SETTINGS)
 
-    django.setup()
+    django14.setup(settings)
 
     parent = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, parent)
