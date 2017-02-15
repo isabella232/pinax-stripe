@@ -3,10 +3,9 @@ import decimal
 from django.core import mail
 from django.test import TestCase
 
-from django.contrib.auth import get_user_model
-
 from mock import patch
 
+from pinax.django14.auth import get_user_model
 from ..actions import charges
 from ..models import Customer
 

@@ -7,12 +7,11 @@ import django
 from django.test import TestCase
 from django.utils import timezone
 
-from pinax.django14.auth import get_user_model
-
 import stripe
 
 from mock import patch, Mock
 
+from pinax.django14.auth import get_user_model
 from ..actions import charges, customers, events, invoices, plans, refunds, sources, subscriptions, transfers
 from ..models import BitcoinReceiver, Customer, Charge, Card, Plan, Event, Invoice, Subscription, Transfer
 

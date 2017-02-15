@@ -6,10 +6,11 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 
 from mock import Mock
 
+from pinax.django14.auth import get_user_model
 from ..conf import settings
 from ..middleware import ActiveSubscriptionMiddleware
 from ..models import Customer, Subscription, Plan

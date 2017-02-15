@@ -52,7 +52,7 @@ def create(user, card=None, plan=settings.PINAX_STRIPE_DEFAULT_PLAN, charge_imme
         trial_end=trial_end
     )
     try:
-        with transaction.atomic():
+        with transaction.commit_on_success():
             cus = models.Customer.objects.create(
                 user=user,
                 stripe_id=stripe_customer["id"]

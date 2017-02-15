@@ -1,9 +1,8 @@
 from django.core.management.base import BaseCommand
 
-from django.contrib.auth import get_user_model
-
 from stripe.error import InvalidRequestError
 
+from pinax.django14.auth import get_user_model
 from ...actions import customers, charges, invoices
 
 
@@ -19,9 +18,8 @@ class Command(BaseCommand):
         for user in qs:
             count += 1
             perc = int(round(100 * (float(count) / float(total))))
-            username = getattr(user, user.USERNAME_FIELD)
             print(u"[{0}/{1} {2}%] Syncing {3} [{4}]".format(
-                count, total, perc, username, user.pk
+                count, total, perc, user.username, user.pk
             ))
             customer = customers.get_customer_for_user(user)
             try:

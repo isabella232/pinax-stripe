@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from django.contrib.auth import get_user_model
-
+from pinax.django14.auth import get_user_model
 from ...actions import customers
 
 

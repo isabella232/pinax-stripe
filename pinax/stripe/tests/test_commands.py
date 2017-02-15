@@ -3,11 +3,11 @@ import decimal
 from django.core import management
 from django.test import TestCase
 
-from django.contrib.auth import get_user_model
 from stripe.error import InvalidRequestError
 
 from mock import patch
 
+from pinax.django14.auth import get_user_model
 from ..models import Customer, Plan, Coupon
 
 

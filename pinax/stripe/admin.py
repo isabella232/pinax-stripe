@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.db.models import Count, Q
 
+from pinax.django14.auth import get_user_model
 from .models import (  # @@@ make all these read-only
     Charge,
     Subscription,
@@ -22,7 +22,7 @@ from .models import (  # @@@ make all these read-only
 def user_search_fields():  # coverage: omit
     User = get_user_model()
     fields = [
-        "user__{0}".format(User.USERNAME_FIELD)
+        "user__username",
     ]
     if "email" in [f.name for f in User._meta.fields]:
         fields += ["user__email"]
@@ -241,8 +241,7 @@ customer_has_card.short_description = "Customer Has Card"
 
 
 def customer_user(obj):
-    User = get_user_model()
-    username = getattr(obj.customer.user, User.USERNAME_FIELD)
+    username = obj.customer.user.username
     email = getattr(obj, "email", "")
     return "{0} <{1}>".format(
         username,

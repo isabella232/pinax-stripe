@@ -4,8 +4,7 @@ import decimal
 from django.test import TestCase
 from django.utils import timezone
 
-from django.contrib.auth import get_user_model
-
+from pinax.django14.auth import get_user_model
 from ..models import Customer, Subscription, Charge, Plan
 
 

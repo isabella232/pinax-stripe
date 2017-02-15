@@ -2,8 +2,7 @@ import decimal
 
 from django.test import TestCase
 
-from django.contrib.auth import get_user_model
-
+from pinax.django14.auth import get_user_model
 from ..hooks import DefaultHookSet
 from ..models import Charge, Customer
 

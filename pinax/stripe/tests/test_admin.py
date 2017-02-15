@@ -1,6 +1,5 @@
 import datetime
 
-from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.utils import timezone
 
@@ -9,6 +8,7 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
+from pinax.django14.auth import get_user_model
 from ..models import Customer, Invoice, Plan, Subscription
 
 
