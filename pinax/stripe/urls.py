@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib import admin
 
 from .views import (
     InvoiceListView,
@@ -16,8 +17,10 @@ from .views import (
     Webhook,
 )
 
+admin.autodiscover()
 
 urlpatterns = [
+
     url(r"^subscriptions/$", SubscriptionListView.as_view(), name="pinax_stripe_subscription_list"),
     url(r"^subscriptions/create/$", SubscriptionCreateView.as_view(), name="pinax_stripe_subscription_create"),
     url(r"^subscriptions/(?P<pk>\d+)/delete/$", SubscriptionDeleteView.as_view(), name="pinax_stripe_subscription_delete"),

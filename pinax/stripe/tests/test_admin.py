@@ -98,7 +98,7 @@ class AdminTestCase(TestCase):
 
     def test_customer_admin(self):
         """Make sure we get good responses for all filter options"""
-        url = reverse('admin:pinax_stripe_customer_changelist')
+        url = reverse('admin:stripe_customer_changelist')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -118,7 +118,7 @@ class AdminTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_invoice_admin(self):
-        url = reverse('admin:pinax_stripe_invoice_changelist')
+        url = reverse('admin:stripe_invoice_changelist')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -126,11 +126,11 @@ class AdminTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_plan_admin(self):
-        url = reverse('admin:pinax_stripe_plan_changelist')
+        url = reverse('admin:stripe_plan_changelist')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_charge_admin(self):
-        url = reverse('admin:pinax_stripe_charge_changelist')
+        url = reverse('admin:stripe_charge_changelist')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
