@@ -1,1 +1,14 @@
-from .test_views import *
+from .test_actions import *  # NOQA
+from .test_admin import *  # NOQA
+from .test_commands import *  # NOQA
+from .test_email import *  # NOQA
+from .test_event import *  # NOQA
+from .test_hooks import *  # NOQA
+from .test_managers import *  # NOQA
+from .test_middleware import *  # NOQA
+from .test_models import *  # NOQA
+from .test_templatetags import *  # NOQA
+from .test_urls import *  # NOQA
+from .test_utils import *  # NOQA
+from .test_views import *  # NOQA
+from .test_webhooks import *  # NOQA

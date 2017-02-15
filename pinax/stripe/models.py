@@ -2,10 +2,13 @@ from __future__ import unicode_literals
 
 import decimal
 
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
+
+from pinax.django14.db import fix_table_name
 import stripe
 
 from jsonfield.fields import JSONField
@@ -13,6 +16,7 @@ from jsonfield.fields import JSONField
 from .conf import settings
 from .managers import ChargeManager, CustomerManager
 from .utils import CURRENCY_SYMBOLS
+
 
 
 class StripeObject(models.Model):
@@ -24,6 +28,7 @@ class StripeObject(models.Model):
         abstract = True
 
 
+@fix_table_name
 @python_2_unicode_compatible
 class Plan(StripeObject):
     amount = models.DecimalField(decimal_places=2, max_digits=9)
@@ -39,6 +44,7 @@ class Plan(StripeObject):
         return "{} ({}{})".format(self.name, CURRENCY_SYMBOLS.get(self.currency, ""), self.amount)
 
 
+@fix_table_name
 @python_2_unicode_compatible
 class Coupon(StripeObject):
 
@@ -63,6 +69,7 @@ class Coupon(StripeObject):
         return "Coupon for {}, {}".format(description, self.duration)
 
 
+@fix_table_name
 @python_2_unicode_compatible
 class EventProcessingException(models.Model):
 
@@ -76,6 +83,7 @@ class EventProcessingException(models.Model):
         return "<{}, pk={}, Event={}>".format(self.message, self.pk, self.event)
 
 
+@fix_table_name
 @python_2_unicode_compatible
 class Event(StripeObject):
 
@@ -98,6 +106,7 @@ class Event(StripeObject):
         return "{} - {}".format(self.kind, self.stripe_id)
 
 
+@fix_table_name
 class Transfer(StripeObject):
     event = models.ForeignKey(Event, related_name="transfers", on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=9)
@@ -107,6 +116,7 @@ class Transfer(StripeObject):
     description = models.TextField(null=True, blank=True)
 
 
+@fix_table_name
 class TransferChargeFee(models.Model):
 
     transfer = models.ForeignKey(Transfer, related_name="charge_fee_details", on_delete=models.CASCADE)
@@ -118,8 +128,7 @@ class TransferChargeFee(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
 
-from django.contrib.auth.models import User
-
+@fix_table_name
 @python_2_unicode_compatible
 class Customer(StripeObject):
 
@@ -139,7 +148,11 @@ class Customer(StripeObject):
     def __str__(self):
         return str(self.user)
 
+    class Meta:
+        db_table = 'asdasd'
 
+
+@fix_table_name
 class Card(StripeObject):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -164,6 +177,7 @@ class Card(StripeObject):
     fingerprint = models.TextField()
 
 
+@fix_table_name
 class BitcoinReceiver(StripeObject):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -184,6 +198,7 @@ class BitcoinReceiver(StripeObject):
     used_for_payment = models.BooleanField(default=False)
 
 
+@fix_table_name
 class Subscription(StripeObject):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -226,6 +241,7 @@ class Subscription(StripeObject):
         self.amount = 0
 
 
+@fix_table_name
 class Invoice(StripeObject):
 
     customer = models.ForeignKey(Customer, related_name="invoices", on_delete=models.CASCADE)
@@ -256,6 +272,7 @@ class Invoice(StripeObject):
         return stripe.Invoice.retrieve(self.stripe_id)
 
 
+@fix_table_name
 class InvoiceItem(models.Model):
 
     stripe_id = models.CharField(max_length=255)
@@ -278,6 +295,7 @@ class InvoiceItem(models.Model):
         return self.plan.name if self.plan else ""
 
 
+@fix_table_name
 class Charge(StripeObject):
 
     customer = models.ForeignKey(Customer, related_name="charges", on_delete=models.CASCADE)
